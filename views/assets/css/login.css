@@ -1,0 +1,32 @@
+.login_box {
+  background-image: linear-gradient(20deg, #0e467768, #ababab);
+  border-radius: 8px;
+  padding: 16px 16px 30px 16px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.login_icon {
+  background-image: linear-gradient(20deg, var(--primary), #771a0eec);
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  margin-top: -55px;
+}
+
+.login_box input {
+  width: 100%;
+  border-radius: 4px;
+  padding: 12px 12px 12px 32px;
+  background: #fff;
+  border: 1px solid #ddd;
+}
+
+.login_box input:focus {
+  border-color: #0e467768;
+}
