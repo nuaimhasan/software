@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { useAllClientsQuery } from "../../../../Redux/client/clientApi";
 import moment from "moment";
-import { FaDownload, FaEye } from "react-icons/fa";
-import { FaDeleteLeft } from "react-icons/fa6";
+import { FaEdit, FaEye, FaPrint } from "react-icons/fa";
+import { MdArrowDropDown, MdDelete } from "react-icons/md";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useState } from "react";
 
@@ -13,8 +13,6 @@ export default function AllClients() {
   query["sort"] = sortOnBoardDate ? 1 : -1;
   const { data, isLoading } = useAllClientsQuery({ ...query });
   const clients = data?.data;
-
-  console.log("clients", clients);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -29,7 +27,7 @@ export default function AllClients() {
         </div>
       </div>
 
-      <div className="relative overflow-x-auto rounded bg-base-100 shadow">
+      <div className="min-h-[80vh] overflow-x-auto rounded bg-base-100">
         <table className="zebra_table">
           <thead>
             <tr>
@@ -46,9 +44,7 @@ export default function AllClients() {
               <th>Client</th>
               <th>Service</th>
               <th>Priority</th>
-              <th>On Board by</th>
               <th>Total Price</th>
-              <th>Total Payment</th>
               <th>Total Due</th>
               <th>Action</th>
             </tr>
@@ -84,24 +80,43 @@ export default function AllClients() {
                     {client?.priority}
                   </p>
                 </td>
-                <td>{client?.onbordedBy}</td>
-                <td>{client?.totalPrice}/=</td>
-                <td>{client?.totalPayment}/=</td>
-                <td>{client?.due}/=</td>
                 <td>
-                  <div className="flex items-center gap-2">
-                    <Link to="" className="duration-200 hover:text-green-500">
-                      <FaEye />
-                    </Link>
+                  {client?.paymentInfo?.totalPrice.toLocaleString("en-IN")}/=
+                </td>
+                <td>{client?.paymentInfo?.due.toLocaleString("en-IN")}/=</td>
+                <td>
+                  <div className="dropdown dropdown-end dropdown-hover">
                     <button
-                      className="tooltip tooltip-left tooltip-primary duration-200 hover:text-blue-500"
-                      data-tip="Download PDF Invoice"
+                      tabIndex={0}
+                      className="flex items-center gap-1 rounded bg-gray-200 px-2 py-1 text-sm"
                     >
-                      <FaDownload className="text-sm" />
+                      Action <MdArrowDropDown />
                     </button>
-                    <button className="duration-200 hover:text-red-500">
-                      <FaDeleteLeft />
-                    </button>
+                    <ul
+                      tabIndex={0}
+                      className="menu dropdown-content z-[1] w-52 rounded-lg bg-base-100 p-2 shadow"
+                    >
+                      <li>
+                        <Link to={`/seo/client/view/${client?._id}`}>
+                          <FaEye /> View Full Details
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to={`/seo/client/make-invoice/${client?._id}`}>
+                          <FaPrint /> Make Invoice
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to={`/seo/client/edit/${client?._id}`}>
+                          <FaEdit /> Edit Client
+                        </Link>
+                      </li>
+                      <li>
+                        <button>
+                          <MdDelete /> Delete Client
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </td>
               </tr>

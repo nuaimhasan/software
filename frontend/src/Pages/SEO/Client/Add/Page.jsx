@@ -132,15 +132,13 @@ export default function AddClient() {
       remark: formData.get("remark"),
       priority: formData.get("priority"),
       services: selectedServices,
-      totalPayment: payment,
-      totalPrice: subTotal,
-      paymentHistory: [
-        {
-          date: new Date(),
-          amount: payment,
-        },
-      ],
-      due: due,
+      paymentInfo: {
+        totalPrice: subTotal,
+        totalPayment: payment,
+        due: due,
+        paymentHistory:
+          payment > 0 ? [{ date: new Date(), amount: payment }] : [],
+      },
     };
 
     const res = await addClient(data);

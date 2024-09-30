@@ -32,21 +32,27 @@ const clientSchema = new mongoose.Schema(
     remark: {
       type: String,
     },
-    totalPrice: {
-      type: Number,
-      required: true,
-    },
-    totalPayment: {
-      type: Number,
-      required: true,
-    },
-    due: {
-      type: Number,
-      required: true,
-    },
-    paymentHistory: {
-      type: Array,
-      required: true,
+    paymentInfo: {
+      invoice: {
+        type: String,
+        required: true,
+      },
+      totalPrice: {
+        type: Number,
+        required: true,
+      },
+      totalPayment: {
+        type: Number,
+        required: true,
+      },
+      due: {
+        type: Number,
+        required: true,
+      },
+      paymentHistory: {
+        type: Array,
+        required: true,
+      },
     },
     services: [
       {

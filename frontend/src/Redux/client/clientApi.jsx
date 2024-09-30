@@ -18,7 +18,19 @@ export const clientApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["client"],
     }),
+
+    singleClient: builder.query({
+      query: (query) => ({
+        url: `/api/client/${query?.id}`,
+        params: query,
+      }),
+      providesTags: ["client"],
+    }),
   }),
 });
 
-export const { useAddClientMutation, useAllClientsQuery } = clientApi;
+export const {
+  useAddClientMutation,
+  useAllClientsQuery,
+  useSingleClientQuery,
+} = clientApi;
