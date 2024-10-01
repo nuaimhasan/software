@@ -12,8 +12,8 @@ export const clientPaymentApi = apiSlice.injectEndpoints({
     }),
 
     allClientPayment: builder.query({
-      query: ({ query, role }) => ({
-        url: `/api/client/payment/all?role=${role}`,
+      query: (query) => ({
+        url: `/api/client/payment/all?role=${query?.role}`,
         params: query,
       }),
       providesTags: ["clientPayment", "client"],

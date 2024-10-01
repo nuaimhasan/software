@@ -45,8 +45,26 @@ exports.add = async (req, res) => {
 };
 
 exports.all = async (req, res) => {
+  const { filterDate, sort } = req.query;
+
   try {
-    const result = await Model.find();
+    let query = {};
+
+    if (filterDate) {
+      const parseDates = JSON.parse(filterDate);
+      const dates = parseDates?.map((timestamp) => {
+        const date = new Date(timestamp).toISOString().split("T")[0]; // Only 'YYYY-MM-DD'
+        return date;
+      });
+
+      query.date = {
+        $in: dates,
+      };
+    }
+
+    const result = await Model.find(query)
+      .populate("client")
+      .sort({ date: sort ? JSON.parse(sort) : -1 });
 
     if (!result) {
       return res.json({

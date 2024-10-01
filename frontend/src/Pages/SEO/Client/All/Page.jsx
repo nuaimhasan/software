@@ -16,7 +16,7 @@ export default function AllClients() {
   const [selectedClient, setSelectedClient] = useState(null);
   const [sortOnBoardDate, setSortOnBoardDate] = useState(true);
   const [search, setSearch] = useState("");
-  const [date, setDate] = useState(Date.now());
+  const [date, setDate] = useState([Date.now()]);
   const [onBoardBy, setOnBoardBy] = useState("");
   const [status, setStatus] = useState("all");
 
@@ -110,10 +110,14 @@ export default function AllClients() {
               <th>
                 <button
                   onClick={() => setSortOnBoardDate(!sortOnBoardDate)}
-                  className="flex w-full items-center justify-between"
+                  className="flex items-center gap-3"
                 >
                   <span>On Board Date</span>
-                  <IoMdArrowDropdown />
+                  {sortOnBoardDate ? (
+                    <IoMdArrowDropdown className="duration-200" />
+                  ) : (
+                    <IoMdArrowDropdown className="rotate-180 transform duration-200" />
+                  )}
                 </button>
               </th>
               <th>Service</th>

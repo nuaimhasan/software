@@ -2,7 +2,7 @@ import { MdOutlineDashboard } from "react-icons/md";
 import SidebarItems from "./SidebarItems";
 
 import { Link } from "react-router-dom";
-import { FaUsers } from "react-icons/fa";
+import { FaMoneyBill, FaUsers } from "react-icons/fa";
 import { IoBusiness } from "react-icons/io5";
 
 const adminSidebarItems = [
@@ -32,6 +32,20 @@ const adminSidebarItems = [
       {
         title: "All Clients",
         path: "/seo/client/all",
+      },
+    ],
+  },
+  {
+    icon: <FaMoneyBill />,
+    title: "Payment",
+    subMenu: [
+      {
+        title: "All Payment",
+        path: "/seo/payment/all",
+      },
+      {
+        title: "Make Payment",
+        path: "/seo/payment/make",
       },
     ],
   },
