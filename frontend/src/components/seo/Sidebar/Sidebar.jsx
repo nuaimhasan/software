@@ -35,6 +35,20 @@ const adminSidebarItems = [
       },
     ],
   },
+  {
+    icon: <IoBusiness />,
+    title: "Daily Work",
+    subMenu: [
+      {
+        title: "Add Today",
+        path: "/seo/dailywork/add",
+      },
+      {
+        title: "All Work",
+        path: "/seo/dailywork/all",
+      },
+    ],
+  },
 ];
 
 export default function Sidebar() {

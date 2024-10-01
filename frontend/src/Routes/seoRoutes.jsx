@@ -5,6 +5,8 @@ import AllClients from "../Pages/SEO/Client/All/Page";
 import ClientDetails from "../Pages/SEO/Client/Details/Page";
 import MakeInvoice from "../Pages/SEO/Client/MakeInvoice/Page";
 import AllServices from "../Pages/SEO/Business/Service/All/Page";
+import DailyWork from "../Pages/SEO/DailyWork/All/Page";
+import AddTodayWork from "../Pages/SEO/DailyWork/Add/Page";
 
 export const seoRoutes = {
   path: "/seo",
@@ -36,6 +38,16 @@ export const seoRoutes = {
     {
       path: "client/make-invoice/:id",
       element: <MakeInvoice />,
+    },
+
+    // ---- daily work ----
+    {
+      path: "dailywork/all",
+      element: <DailyWork />,
+    },
+    {
+      path: "dailywork/add",
+      element: <AddTodayWork />,
     },
   ],
 };

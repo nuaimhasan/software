@@ -65,6 +65,7 @@ exports.all = async (req, res) => {
       query.$or = [
         { name: { $regex: search, $options: "i" } },
         { number: { $regex: search, $options: "i" } },
+        { company: { $regex: search, $options: "i" } },
       ];
     }
     if (onBoardBy && onBoardBy !== "all" && onBoardBy.trim())
@@ -81,10 +82,8 @@ exports.all = async (req, res) => {
       }
     }
 
-    console.log(query);
-
     const clients = await Model.find(query)
-      .sort({ onBoardDate: JSON.parse(sort) })
+      .sort({ onBoardDate: sort ? JSON.parse(sort) : -1 })
       .populate("paymentHistory", "amount date");
 
     if (!clients) {

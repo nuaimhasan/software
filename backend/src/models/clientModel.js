@@ -13,10 +13,12 @@ const clientSchema = new mongoose.Schema(
     company: {
       type: String,
       required: true,
+      unique: true,
     },
     number: {
       type: String,
       required: true,
+      unique: true,
     },
     address: {
       type: String,
