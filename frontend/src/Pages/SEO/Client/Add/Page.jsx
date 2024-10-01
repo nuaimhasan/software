@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import "react-tagsinput/react-tagsinput.css";
 import Select from "react-dropdown-select";
@@ -6,55 +6,39 @@ import { MdDelete } from "react-icons/md";
 import { useAddClientMutation } from "../../../../Redux/client/clientApi";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
-const services = [
-  {
-    id: 1,
-    name: "plan 1",
-    order: 1,
-  },
-  {
-    id: 2,
-    name: "plan 2",
-    order: 2,
-  },
-  {
-    id: 3,
-    name: "plan 3",
-    order: 3,
-  },
-  {
-    id: 4,
-    name: "Page Setup",
-    order: 4,
-  },
-  {
-    id: 5,
-    name: "Web Development",
-    order: 5,
-  },
-  {
-    id: 6,
-    name: "Domain & Hosting",
-    order: 6,
-  },
-  {
-    id: 7,
-    name: "Video Making",
-    order: 7,
-  },
-  {
-    id: 8,
-    name: "Like & Follow",
-    order: 8,
-  },
-];
+import { useAllServicesQuery } from "../../../../Redux/serviceApi";
+import TagsInput from "react-tagsinput";
 
 export default function AddClient() {
   const navigate = useNavigate();
   const [onboardDate, setOnboardDate] = useState(new Date());
   const [selectedServices, setSelectedServices] = useState([]);
   const [payment, setpayment] = useState(0);
+  const [social, setSocial] = useState([]);
+  const [socials, setSocials] = useState([]);
+  useEffect(() => {
+    if (social?.length > 0) {
+      setSocials(
+        social.map((s) => {
+          return { name: s, link: "" };
+        }),
+      );
+    }
+  }, [social]);
+
+  const handleLinkChange = (value, socialName) => {
+    setSocials(
+      socials?.map((s) => {
+        if (s?.name == socialName) {
+          return { ...s, link: value };
+        }
+        return s;
+      }),
+    );
+  };
+
+  const { data } = useAllServicesQuery({ role: "seo" });
+  const services = data?.data;
 
   const [addClient, { isLoading }] = useAddClientMutation();
 
@@ -66,7 +50,12 @@ export default function AddClient() {
     setSelectedServices(
       selectedServices.map((s) => {
         if (s.id === service.id) {
-          return { ...s, price: parseInt(value), discount: 0, value: "" };
+          return {
+            ...s,
+            price: parseInt(value),
+            discount: 0,
+            value: "",
+          };
         }
         return s;
       }),
@@ -136,9 +125,9 @@ export default function AddClient() {
         totalPrice: subTotal,
         totalPayment: payment,
         due: due,
-        paymentHistory:
-          payment > 0 ? [{ date: new Date(), amount: payment }] : [],
       },
+      initialPayment: payment,
+      socials,
     };
 
     const res = await addClient(data);
@@ -202,11 +191,9 @@ export default function AddClient() {
           <div>
             <label htmlFor="name">On Borded by *</label>
             <select name="onbordedBy">
-              <option value="" disabled>
-                Select{" "}
-              </option>
+              <option disabled>Select</option>
               <option value="sajjad">Sajjad</option>
-              <option value="min">Mim</option>
+              <option value="mim">Mim</option>
             </select>
           </div>
 
@@ -223,7 +210,41 @@ export default function AddClient() {
             <label htmlFor="name">Remark</label>
             <textarea name="remark"></textarea>
           </div>
+
+          <div className="col-span-2">
+            <div>
+              <label>Social Links</label>
+              <TagsInput value={social} onChange={(tags) => setSocial(tags)} />
+            </div>
+          </div>
         </div>
+
+        {/* social */}
+        {social.length > 0 && (
+          <div className="relative overflow-x-auto">
+            <table className="border_table">
+              <thead>
+                <tr>
+                  <th>Social Name</th>
+                  <th>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {social?.map((s, i) => (
+                  <tr key={i}>
+                    <td>{s}</td>
+                    <td>
+                      <input
+                        type="text"
+                        onChange={(e) => handleLinkChange(e.target.value, s)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         {/* Services */}
         <div className="mt-4">
@@ -252,6 +273,7 @@ export default function AddClient() {
                       <th>Action</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {selectedServices.map((service, i) => (
                       <tr key={i}>
@@ -315,6 +337,8 @@ export default function AddClient() {
                         </p>
                       </th>
                       <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
 
                     <tr>
@@ -325,6 +349,8 @@ export default function AddClient() {
                         </p>
                       </th>
                       <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
 
                     <tr className="bg-gray-50">
@@ -334,6 +360,8 @@ export default function AddClient() {
                           {subTotal ? subTotal : "00"}TK
                         </p>
                       </th>
+                      <td></td>
+                      <td></td>
                       <td></td>
                     </tr>
 
@@ -349,6 +377,8 @@ export default function AddClient() {
                         />
                       </th>
                       <td></td>
+                      <td></td>
+                      <td></td>
                     </tr>
 
                     <tr className="bg-gray-100">
@@ -356,6 +386,8 @@ export default function AddClient() {
                       <th>
                         <p className="text-end">{due}TK</p>
                       </th>
+                      <td></td>
+                      <td></td>
                       <td></td>
                     </tr>
                   </tfoot>

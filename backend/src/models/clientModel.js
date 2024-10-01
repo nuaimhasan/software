@@ -49,10 +49,6 @@ const clientSchema = new mongoose.Schema(
         type: Number,
         required: true,
       },
-      paymentHistory: {
-        type: Array,
-        required: true,
-      },
     },
     services: [
       {
@@ -67,11 +63,38 @@ const clientSchema = new mongoose.Schema(
         value: {
           type: String,
         },
+        type: {
+          type: String,
+          required: true,
+          enum: ["monthly", "ontime"],
+        },
         discount: {
           type: Number,
         },
       },
     ],
+    socials: [
+      {
+        name: {
+          type: String,
+        },
+        link: {
+          type: String,
+        },
+      },
+    ],
+    paymentHistory: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ClientPayment",
+      },
+    ],
+    status: {
+      type: String,
+      required: true,
+      enum: ["active", "close"],
+      default: "active",
+    },
   },
   { timestamps: true }
 );

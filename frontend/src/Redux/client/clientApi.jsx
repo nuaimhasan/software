@@ -26,6 +26,14 @@ export const clientApi = apiSlice.injectEndpoints({
       }),
       providesTags: ["client"],
     }),
+
+    deleteClient: builder.mutation({
+      query: ({ id, role }) => ({
+        url: `/api/client/delete/${id}?role=${role}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["client"],
+    }),
   }),
 });
 
@@ -33,4 +41,5 @@ export const {
   useAddClientMutation,
   useAllClientsQuery,
   useSingleClientQuery,
+  useDeleteClientMutation,
 } = clientApi;

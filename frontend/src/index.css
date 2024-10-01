@@ -64,6 +64,11 @@ label {
   display: block;
 }
 
+.filter_option input,
+.filter_option select {
+  border-radius: 0px 5px 5px 0px;
+}
+
 /* -------------------------------------------- */
 .admin_sidebar {
   height: 100vh;

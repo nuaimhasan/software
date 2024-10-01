@@ -17,7 +17,7 @@ const adminSidebarItems = [
     subMenu: [
       {
         title: "Services",
-        path: "/seo/business/services",
+        path: "/seo/business/service/all",
       },
     ],
   },
@@ -39,14 +39,14 @@ const adminSidebarItems = [
 
 export default function Sidebar() {
   return (
-    <div className="h-full flex flex-col justify-between">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <Link to="/">
           <img
             src="/images/logo/logo.png"
             alt="logo"
             height={100}
-            className="w-24 sm:w-36 mx-auto my-3"
+            className="mx-auto my-3 w-24 sm:w-36"
           />
         </Link>
 
