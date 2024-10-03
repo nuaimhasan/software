@@ -4,10 +4,11 @@ import { userLoggedIn } from "./userSlice";
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
-      query: (userInfo) => ({
-        url: "/api/user/register",
+      query: ({ data, role }) => ({
+        url: "/api/user/add",
         method: "POST",
-        body: userInfo,
+        body: data,
+        params: { role },
       }),
     }),
 

@@ -9,10 +9,10 @@ const {
   loggedUser,
 } = require("../controllers/userController");
 
-router.post("/add", add);
+router.post("/add", verifyToken, add);
 router.post("/login", login);
 router.get("/logout", verifyToken, logout);
-router.get("/all", allUsers);
+router.get("/all", verifyToken, allUsers);
 router.get("/me", verifyToken, loggedUser);
 
 module.exports = router;

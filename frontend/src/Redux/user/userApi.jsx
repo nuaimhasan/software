@@ -3,15 +3,9 @@ import { apiSlice } from "../api/apiSlice";
 export const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     allUsers: builder.query({
-      query: () => ({
-        url: "/user/allUsers",
-      }),
-      providesTags: ["users"],
-    }),
-
-    allCustomers: builder.query({
-      query: () => ({
-        url: "/user/allCustomers",
+      query: (query) => ({
+        url: "/api/user/all",
+        params: query,
       }),
       providesTags: ["users"],
     }),
@@ -38,7 +32,6 @@ export const userApi = apiSlice.injectEndpoints({
 
 export const {
   useAllUsersQuery,
-  useAllCustomersQuery,
   useEditUserInfoMutation,
   useEditUserImageMutation,
 } = userApi;

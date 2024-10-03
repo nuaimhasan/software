@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema(
         "executive",
       ],
     },
+    addedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
   { timestamps: true }
 );

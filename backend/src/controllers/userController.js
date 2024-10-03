@@ -136,8 +136,14 @@ exports.loggedUser = async (req, res) => {
 
 // all users
 exports.allUsers = async (req, res) => {
+  const { user } = req?.query;
   try {
-    const users = await User.find();
+    let query = {};
+    if (user) {
+      query.role = user;
+    }
+
+    const users = await User.find(query);
 
     if (!users) {
       return res.json({

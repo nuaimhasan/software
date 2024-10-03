@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useAuthCheck } from "../Hook/useAuthCheck";
 import Sidebar from "../components/cto/Sidebar/Sidebar";
 import Header from "../components/cto/Header/Header";
 
@@ -18,19 +18,12 @@ export default function CTOLayout() {
     });
   }, []);
 
-  const { loggedUser, userLoading } = useSelector((state) => state.user);
-
-  // if (userLoading) return <div>Loading...</div>;
-
-  // if (
-  //   !loggedUser?.success ||
-  //   (loggedUser == "undefined" && !userLoading) ||
-  //   loggedUser?.data?.role !== "cto"
-  // )
-  //   return <Navigate to="/login" />;
+  const { isLoading, isValidUser } = useAuthCheck("cto");
+  if (isLoading) return <div>Loading...</div>;
+  if (!isValidUser) return <Navigate to="/login" />;
 
   return (
-    <section className="flex">
+    <section className="flex" data-theme="light" id="cto">
       <aside
         className={`admin_sidebar bg-base-100 ${
           sidebar && "admin_sidebar_show"
@@ -40,7 +33,7 @@ export default function CTOLayout() {
       </aside>
       <div className="admin_content">
         <Header sidebar={sidebar} setSidebar={setSidebar} />
-        <main className="p-3">
+        <main className="p-2">
           <Outlet />
         </main>
       </div>
