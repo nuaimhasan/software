@@ -1,12 +1,16 @@
+import { FaEye } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 import moment from "moment";
-
+import { useState } from "react";
+import EditModal from "./EditModal";
 import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectApi";
-import { Link } from "react-router-dom";
 
-export default function CompletedProjects() {
+export default function AsignsProjects() {
+  const [selectedProject, setSelectedProject] = useState(null);
+
   const { data, isLoading } = useAllDeveloperProjectQuery({
     role: "cto",
-    status: "completed",
+    status: "pending",
   });
   const projects = data?.data;
 
@@ -15,7 +19,7 @@ export default function CompletedProjects() {
   return (
     <section className="rounded bg-base-100 shadow">
       <div className="flex items-center justify-between px-4 py-3">
-        <h2>Completed Projects</h2>
+        <h2>Asigns Projects</h2>
       </div>
 
       <div className="relative overflow-x-auto shadow-lg">
@@ -26,9 +30,7 @@ export default function CompletedProjects() {
               <th>Project Name</th>
               <th>Developer</th>
               <th>Asign Date</th>
-              <th>Start Date</th>
               <th>Handover Date</th>
-              <th>Completed Date</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -39,14 +41,27 @@ export default function CompletedProjects() {
                 <td>{project?.name}</td>
                 <td>{project?.developer?.name}</td>
                 <td>{moment(project?.asignDate).format("D MMMM YYYY")}</td>
-                <td>{moment(project?.startDate).format("D MMMM YYYY")}</td>
                 <td>{moment(project?.handoverDate).format("D MMMM YYYY")}</td>
-                <td>{moment(project?.completedDate).format("D MMMM YYYY")}</td>
                 <td>
                   <div className="flex items-center gap-2">
-                    <Link to={`/cto/projects/completed/${project?._id}`}>
-                      View
-                    </Link>
+                    <div>
+                      <button
+                        onClick={() => {
+                          setSelectedProject(project);
+                          document.getElementById("edit_project_modal").show();
+                        }}
+                      >
+                        <MdEdit className="text-lg text-blue-500" />
+                      </button>
+
+                      <EditModal project={selectedProject} />
+                    </div>
+
+                    <div>
+                      <button>
+                        <FaEye className="text-lg text-red-500" />
+                      </button>
+                    </div>
                   </div>
                 </td>
               </tr>

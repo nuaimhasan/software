@@ -15,7 +15,7 @@ export default function OnGoingProjects() {
   return (
     <section className="rounded bg-base-100 shadow">
       <div className="flex items-center justify-between px-4 py-3">
-        <h2>Asigns Projects</h2>
+        <h2>On Going Projects</h2>
       </div>
 
       <div className="relative overflow-x-auto shadow-lg">

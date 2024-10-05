@@ -14,6 +14,10 @@ const adminSidebarItems = [
     title: "Project",
     subMenu: [
       {
+        title: "Asign Project",
+        path: "/developer/project/asign",
+      },
+      {
         title: "Ongoing Project",
         path: "/developer/project/ongoing",
       },
