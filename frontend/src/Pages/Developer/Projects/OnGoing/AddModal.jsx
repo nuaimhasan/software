@@ -1,14 +1,14 @@
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import { useAllUsersQuery } from "../../../../Redux/user/userApi";
-import { useAddAsignProjectMutation } from "../../../../Redux/asignProjectApi";
+import { useAddDeveloperProjectMutation } from "../../../../Redux/develoeprProjectApi";
 
 export default function AddModal() {
   let query = { role: "cto", user: "developer" };
   const { data } = useAllUsersQuery({ ...query });
   const developers = data?.data;
 
-  const [addAsignProject, { isLoading }] = useAddAsignProjectMutation();
+  const [addDeveloperProject, { isLoading }] = useAddDeveloperProjectMutation();
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ export default function AddModal() {
       note,
     };
 
-    const res = await addAsignProject({ data, role: "cto" });
+    const res = await addDeveloperProject({ data, role: "cto" });
     if (res?.data?.success) {
       document.getElementById("add_project_modal").close();
       toast.success(

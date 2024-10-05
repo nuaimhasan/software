@@ -1,4 +1,4 @@
-const Model = require("../models/asignProjectModel");
+const Model = require("../models/developerProjectModel");
 
 exports.add = async (req, res) => {
   let data = req?.body;
@@ -20,11 +20,15 @@ exports.add = async (req, res) => {
 };
 
 exports.all = async (req, res) => {
-  const { user } = req.query;
+  const { user, status } = req.query;
   try {
     let query = {};
     if (user) {
       query.developer = user;
+    }
+
+    if (status) {
+      query.status = status;
     }
 
     const result = await Model.find(query).populate("developer");

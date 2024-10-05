@@ -1,14 +1,18 @@
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import { useAllUsersQuery } from "../../../../Redux/user/userApi";
-import { useAddAsignProjectMutation } from "../../../../Redux/asignProjectApi";
+import TagsInput from "react-tagsinput";
+import { useState } from "react";
+import { useAddDeveloperProjectMutation } from "../../../../Redux/develoeprProjectApi";
 
 export default function AddModal() {
   let query = { role: "cto", user: "developer" };
+  const [tecnology, setTecnology] = useState([]);
+
   const { data } = useAllUsersQuery({ ...query });
   const developers = data?.data;
 
-  const [addAsignProject, { isLoading }] = useAddAsignProjectMutation();
+  const [addDeveloperProject, { isLoading }] = useAddDeveloperProjectMutation();
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -22,12 +26,14 @@ export default function AddModal() {
     const data = {
       name,
       developer,
+      technologies: tecnology,
       asignDate,
       handoverDate,
       note,
+      status: "pending",
     };
 
-    const res = await addAsignProject({ data, role: "cto" });
+    const res = await addDeveloperProject({ data, role: "cto" });
     if (res?.data?.success) {
       document.getElementById("add_project_modal").close();
       toast.success(
@@ -62,6 +68,14 @@ export default function AddModal() {
           </div>
 
           <div className="mt-2">
+            <p className="mb-1 text-sm text-neutral-content">Tecnology</p>
+            <TagsInput
+              value={tecnology}
+              onChange={(tags) => setTecnology(tags)}
+            />
+          </div>
+
+          <div className="mt-2">
             <p className="mb-1 text-sm text-neutral-content">Asign Developer</p>
             <select name="developer">
               {developers?.map((developer) => (
@@ -72,14 +86,16 @@ export default function AddModal() {
             </select>
           </div>
 
-          <div className="mt-2">
-            <p className="mb-1 text-sm text-neutral-content">Asign Date</p>
-            <input type="date" name="asignDate" required />
-          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="mt-2">
+              <p className="mb-1 text-sm text-neutral-content">Asign Date</p>
+              <input type="date" name="asignDate" required />
+            </div>
 
-          <div className="mt-2">
-            <p className="mb-1 text-sm text-neutral-content">Handover Date</p>
-            <input type="date" name="handoverDate" required />
+            <div className="mt-2">
+              <p className="mb-1 text-sm text-neutral-content">Handover Date</p>
+              <input type="date" name="handoverDate" required />
+            </div>
           </div>
 
           <div className="mt-2">

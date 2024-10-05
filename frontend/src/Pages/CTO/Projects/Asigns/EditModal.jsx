@@ -1,19 +1,32 @@
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import { useAllUsersQuery } from "../../../../Redux/user/userApi";
-import { useAddAsignProjectMutation } from "../../../../Redux/asignProjectApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useUpdateDeveloperProjectMutation } from "../../../../Redux/develoeprProjectApi";
+import TagsInput from "react-tagsinput";
 
 export default function EditModal({ project }) {
+  const [tecnology, setTecnology] = useState([]);
   const [developer, setDeveloper] = useState(project?.developer?._id);
+
+  useEffect(() => {
+    if (project?.technologies) {
+      setTecnology(project?.technologies);
+    }
+
+    if (project?.developer?._id) {
+      setDeveloper(project?.developer?._id);
+    }
+  }, [project]);
 
   let query = { role: "cto", user: "developer" };
   const { data } = useAllUsersQuery({ ...query });
   const developers = data?.data;
 
-  const [addAsignProject, { isLoading }] = useAddAsignProjectMutation();
+  const [updateDeveloperProject, { isLoading }] =
+    useUpdateDeveloperProjectMutation();
 
-  const handleAdd = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const name = form.get("name");
@@ -30,20 +43,20 @@ export default function EditModal({ project }) {
       note,
     };
 
-    console.log(data);
+    const id = project?._id;
 
-    // const res = await addAsignProject({ data, role: "cto" });
-    // if (res?.data?.success) {
-    //   document.getElementById("edit_project_modal").close();
-    //   toast.success(
-    //     res?.data?.message ? res?.data?.message : "Project added successfully",
-    //   );
-    // } else {
-    //   toast.error(
-    //     res?.data?.message ? res?.data?.message : "Something went wrong!",
-    //   );
-    //   console.log(res);
-    // }
+    const res = await updateDeveloperProject({ id, data, role: "cto" });
+    if (res?.data?.success) {
+      document.getElementById("edit_project_modal").close();
+      toast.success(
+        res?.data?.message ? res?.data?.message : "Project update successfully",
+      );
+    } else {
+      toast.error(
+        res?.data?.message ? res?.data?.message : "Something went wrong!",
+      );
+      console.log(res);
+    }
   };
 
   return (
@@ -62,7 +75,7 @@ export default function EditModal({ project }) {
           </button>
         </div>
 
-        <form onSubmit={handleAdd} className="form_group">
+        <form onSubmit={handleEdit} className="form_group">
           <div className="mt-2">
             <p className="mb-1 text-sm text-neutral-content">Project Name</p>
             <input
@@ -70,6 +83,14 @@ export default function EditModal({ project }) {
               name="name"
               required
               defaultValue={project?.name}
+            />
+          </div>
+
+          <div className="mt-2">
+            <p className="mb-1 text-sm text-neutral-content">Tecnology</p>
+            <TagsInput
+              value={tecnology}
+              onChange={(tags) => setTecnology(tags)}
             />
           </div>
 
@@ -88,24 +109,26 @@ export default function EditModal({ project }) {
             </select>
           </div>
 
-          <div className="mt-2">
-            <p className="mb-1 text-sm text-neutral-content">Asign Date</p>
-            <input
-              type="date"
-              name="asignDate"
-              required
-              defaultValue={project?.asignDate}
-            />
-          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="mt-2">
+              <p className="mb-1 text-sm text-neutral-content">Asign Date</p>
+              <input
+                type="date"
+                name="asignDate"
+                required
+                defaultValue={project?.asignDate}
+              />
+            </div>
 
-          <div className="mt-2">
-            <p className="mb-1 text-sm text-neutral-content">Handover Date</p>
-            <input
-              type="date"
-              name="handoverDate"
-              required
-              defaultValue={project?.handoverDate}
-            />
+            <div className="mt-2">
+              <p className="mb-1 text-sm text-neutral-content">Handover Date</p>
+              <input
+                type="date"
+                name="handoverDate"
+                required
+                defaultValue={project?.handoverDate}
+              />
+            </div>
           </div>
 
           <div className="mt-2">

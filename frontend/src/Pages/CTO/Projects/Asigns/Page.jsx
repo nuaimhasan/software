@@ -1,27 +1,30 @@
 import AddModal from "./AddModal";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
-import {
-  useAllAsignProjectQuery,
-  useDeleteAsignProjectMutation,
-} from "../../../../Redux/asignProjectApi";
 import moment from "moment";
 import { useState } from "react";
 import EditModal from "./EditModal";
 import toast from "react-hot-toast";
+import {
+  useAllDeveloperProjectQuery,
+  useDeleteDeveloperProjectMutation,
+} from "../../../../Redux/develoeprProjectApi";
 
 export default function AsignsProjects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const { data, isLoading } = useAllAsignProjectQuery({ role: "cto" });
+  const { data, isLoading } = useAllDeveloperProjectQuery({
+    role: "cto",
+    status: "pending",
+  });
   const projects = data?.data;
 
-  const [deleteAsignProject] = useDeleteAsignProjectMutation();
+  const [deleteDeveloperProject] = useDeleteDeveloperProjectMutation();
 
   const handleDelete = async (id) => {
     const confirm = window.confirm("Are you sure delete this project?");
     if (!confirm) return;
-    const res = await deleteAsignProject({ id, role: "cto" });
+    const res = await deleteDeveloperProject({ id, role: "cto" });
     if (res?.data?.success) {
       toast.success(
         res?.data?.message

@@ -1,13 +1,21 @@
+import moment from "moment";
+
+import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectApi";
 import { Link } from "react-router-dom";
 
 export default function CompletedProjects() {
+  const { data, isLoading } = useAllDeveloperProjectQuery({
+    role: "cto",
+    status: "completed",
+  });
+  const projects = data?.data;
+
+  if (isLoading) return <h1>Loading...</h1>;
+
   return (
     <section className="rounded bg-base-100 shadow">
       <div className="flex items-center justify-between px-4 py-3">
-        <h2>Completed Projects</h2>
-        <Link to="/cto/project/completed/add" className="primary_btn">
-          Asigns Project
-        </Link>
+        <h2>Asigns Projects</h2>
       </div>
 
       <div className="relative overflow-x-auto shadow-lg">
@@ -15,29 +23,34 @@ export default function CompletedProjects() {
           <thead>
             <tr>
               <th>SL</th>
-              <th>Name</th>
-              <th>Designation</th>
+              <th>Project Name</th>
+              <th>Developer</th>
+              <th>Asign Date</th>
+              <th>Start Date</th>
+              <th>Handover Date</th>
+              <th>Completed Date</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>
-                <div className="flex items-center gap-2">
-                  <img src="" alt="" className="h-8 w-8 rounded-full border" />
-                  developer?.name
-                </div>
-              </td>
-              <td>developer?.designation</td>
-              <td>
-                <div className="flex items-center gap-2">
-                  {/* <EditBtn id={developer?._id} />
-
-                    <DeleteBtn id={developer?._id} /> */}
-                </div>
-              </td>
-            </tr>
+            {projects?.map((project, index) => (
+              <tr key={project?._id}>
+                <td>{index + 1}</td>
+                <td>{project?.name}</td>
+                <td>{project?.developer?.name}</td>
+                <td>{moment(project?.asignDate).format("D MMMM YYYY")}</td>
+                <td>{moment(project?.startDate).format("D MMMM YYYY")}</td>
+                <td>{moment(project?.handoverDate).format("D MMMM YYYY")}</td>
+                <td>{moment(project?.completedDate).format("D MMMM YYYY")}</td>
+                <td>
+                  <div className="flex items-center gap-2">
+                    <Link to={`/cto/projects/completed/${project?._id}`}>
+                      View
+                    </Link>
+                  </div>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

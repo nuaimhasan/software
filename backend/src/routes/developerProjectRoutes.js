@@ -7,7 +7,7 @@ const {
   single,
   update,
   destroy,
-} = require("../controllers/asignProjectController");
+} = require("../controllers/developerProjectController");
 
 router.post("/add", verifyToken, add);
 router.get("/all", verifyToken, all);

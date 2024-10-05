@@ -1,8 +1,8 @@
 import { IoClose } from "react-icons/io5";
 import { toast } from "react-hot-toast";
 import { useAllUsersQuery } from "../../../../Redux/user/userApi";
-import { useAddAsignProjectMutation } from "../../../../Redux/asignProjectApi";
 import { useState } from "react";
+import { useAddDeveloperProjectMutation } from "../../../../Redux/develoeprProjectApi";
 
 export default function EditModal({ project }) {
   const [developer, setDeveloper] = useState(project?.developer?._id);
@@ -11,7 +11,7 @@ export default function EditModal({ project }) {
   const { data } = useAllUsersQuery({ ...query });
   const developers = data?.data;
 
-  const [addAsignProject, { isLoading }] = useAddAsignProjectMutation();
+  const [addDeveloperProject, { isLoading }] = useAddDeveloperProjectMutation();
 
   const handleAdd = async (e) => {
     e.preventDefault();

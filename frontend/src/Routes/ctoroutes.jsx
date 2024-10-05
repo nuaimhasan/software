@@ -3,6 +3,7 @@ import Dashboard from "../pages/CTO/Dashboard/Dashboard";
 import Developers from "../pages/CTO/Developer/All/Page";
 import AsignsProjects from "../Pages/CTO/Projects/Asigns/Page";
 import CompletedProjects from "../Pages/CTO/Projects/Completed/Page";
+import OnGoingProjects from "../Pages/CTO/Projects/OnGoing/Page";
 
 export const ctoroutes = {
   path: "/cto",
@@ -19,6 +20,10 @@ export const ctoroutes = {
     {
       path: "project/asigns",
       element: <AsignsProjects />,
+    },
+    {
+      path: "project/ongoing",
+      element: <OnGoingProjects />,
     },
     {
       path: "project/completed",

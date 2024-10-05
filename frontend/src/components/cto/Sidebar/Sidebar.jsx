@@ -24,6 +24,10 @@ const adminSidebarItems = [
         path: "/cto/project/asigns",
       },
       {
+        title: "On Going Project",
+        path: "/cto/project/ongoing",
+      },
+      {
         title: "Completed Project",
         path: "/cto/project/completed",
       },
