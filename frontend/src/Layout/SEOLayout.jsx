@@ -20,7 +20,8 @@ export default function SEOLayout() {
 
   const { isLoading, isValidUser } = useAuthCheck("seo");
   if (isLoading) return <div>Loading...</div>;
-  if (!isValidUser) return <Navigate to="/login" />;
+
+  if (!isValidUser) return <Navigate to="/login/seo" />;
 
   return (
     <section className="flex" data-theme="light" id="seo">

@@ -55,6 +55,13 @@ exports.login = async (req, res) => {
       });
     }
 
+    if (user?.role !== data?.role) {
+      return res.json({
+        success: false,
+        message: "invalid role",
+      });
+    }
+
     const validPassword = await bcrypt.compare(data.password, user.password);
 
     if (!validPassword) {

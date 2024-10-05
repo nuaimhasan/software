@@ -20,7 +20,7 @@ export default function Header({ sidebar, setSidebar }) {
   };
 
   return (
-    <header className="px-6 py-3">
+    <header className="bg-base-100 px-6 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button

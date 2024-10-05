@@ -12,7 +12,7 @@ export const mainRoutes = {
       element: <Home />,
     },
     {
-      path: "/login",
+      path: "/login/:role",
       element: <Login />,
     },
   ],

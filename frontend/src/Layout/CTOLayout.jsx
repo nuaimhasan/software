@@ -20,7 +20,7 @@ export default function CTOLayout() {
 
   const { isLoading, isValidUser } = useAuthCheck("cto");
   if (isLoading) return <div>Loading...</div>;
-  if (!isValidUser) return <Navigate to="/login" />;
+  if (!isValidUser) return <Navigate to="/login/cto" />;
 
   return (
     <section className="flex" data-theme="light" id="cto">

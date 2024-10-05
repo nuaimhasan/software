@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
-import { BsCart4 } from "react-icons/bs";
 import SidebarItems from "./SidebarItems";
+import { GoProjectRoadmap } from "react-icons/go";
 
 const adminSidebarItems = [
   {
@@ -10,22 +10,31 @@ const adminSidebarItems = [
     path: "/developer/dashboard",
   },
   {
-    icon: <BsCart4 />,
-    title: "Developers",
-    path: "/developer/all",
+    icon: <GoProjectRoadmap />,
+    title: "Project",
+    subMenu: [
+      {
+        title: "Ongoing Project",
+        path: "/developer/project/ongoing",
+      },
+      {
+        title: "Completed Project",
+        path: "/developer/project/completed",
+      },
+    ],
   },
 ];
 
 export default function Sidebar() {
   return (
-    <div className="h-full flex flex-col justify-between">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <Link to="/">
           <img
             src="/images/logo/logo.png"
             alt="logo"
             height={100}
-            className="w-24 sm:w-36 mx-auto my-3"
+            className="mx-auto my-3 w-24 sm:w-36"
           />
         </Link>
 

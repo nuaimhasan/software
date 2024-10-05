@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import Header from "../components/developer/Header/Header";
 import Sidebar from "../components/developer/Sidebar/Sidebar";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { useAuthCheck } from "../Hook/useAuthCheck";
 
-export default function DeveloperLayout({ children }) {
+export default function DeveloperLayout() {
   const [sidebar, setSidebar] = useState(false);
   useEffect(() => {
     window.addEventListener("click", (e) => {
@@ -20,7 +20,7 @@ export default function DeveloperLayout({ children }) {
 
   const { isLoading, isValidUser } = useAuthCheck("developer");
   if (isLoading) return <div>Loading...</div>;
-  if (!isValidUser) return <Navigate to="/login" />;
+  if (!isValidUser) return <Navigate to="/login/developer" />;
 
   return (
     <section className="flex" data-theme="light" id="developer">
@@ -33,7 +33,9 @@ export default function DeveloperLayout({ children }) {
       </aside>
       <div className="admin_content">
         <Header sidebar={sidebar} setSidebar={setSidebar} />
-        <main className="p-3">{children}</main>
+        <main className="p-3">
+          <Outlet />
+        </main>
       </div>
     </section>
   );

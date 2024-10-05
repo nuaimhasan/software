@@ -20,8 +20,14 @@ exports.add = async (req, res) => {
 };
 
 exports.all = async (req, res) => {
+  const { user } = req.query;
   try {
-    const result = await Model.find().populate("developer");
+    let query = {};
+    if (user) {
+      query.developer = user;
+    }
+
+    const result = await Model.find(query).populate("developer");
 
     if (!result) {
       return res.json({

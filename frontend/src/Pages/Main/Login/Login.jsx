@@ -3,21 +3,13 @@ import { useState } from "react";
 import { CgLogIn } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { FaLock } from "react-icons/fa";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useLoginMutation } from "../../../Redux/user/authApi";
-import { useSelector } from "react-redux";
 
 export default function Login() {
+  const { role } = useParams();
   const navigate = useNavigate();
-  const { loggedUser } = useSelector((state) => state.user);
   const [error, setError] = useState("");
-
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
-
-  if (loggedUser?.success) {
-    navigate(from, { replace: true });
-  }
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -37,14 +29,20 @@ export default function Login() {
     const data = {
       email,
       password,
+      role,
     };
 
     const res = await login(data);
 
     if (res?.data?.success) {
-      const role = res?.data?.data?.role;
-      navigate(`/${role}/dashboard`);
-      setError("");
+      const loggedRole = res?.data?.data?.role;
+
+      if (loggedRole == role) {
+        navigate(`/${role}/dashboard`);
+        setError("");
+      } else {
+        setError("You are not authorized to login as " + role);
+      }
     } else {
       console.log(res);
       setError(res?.data?.message);
