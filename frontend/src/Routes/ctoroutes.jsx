@@ -1,6 +1,6 @@
 import CTOLayout from "../layout/CTOLayout";
-import Dashboard from "../pages/CTO/Dashboard/Dashboard";
-import Developers from "../pages/CTO/Developer/All/Page";
+import Dashboard from "../Pages/CTO/Dashboard/Dashboard";
+import Developers from "../Pages/CTO/Developer/All/Page";
 import AsignsProjects from "../Pages/CTO/Projects/Asigns/Page";
 import CompletedProjects from "../Pages/CTO/Projects/Completed/Page";
 import OnGoingProjects from "../Pages/CTO/Projects/OnGoing/Page";
@@ -15,19 +15,19 @@ export const ctoroutes = {
     },
     {
       path: "developer/all",
-      element: <Developers />,
+      element: <Developers role="cto" />,
     },
     {
       path: "project/asigns",
-      element: <AsignsProjects />,
+      element: <AsignsProjects role="cto" />,
     },
     {
       path: "project/ongoing",
-      element: <OnGoingProjects />,
+      element: <OnGoingProjects role="cto" />,
     },
     {
       path: "project/completed",
-      element: <CompletedProjects />,
+      element: <CompletedProjects role="cto" />,
     },
   ],
 };

@@ -9,9 +9,10 @@ import EditModal from "./EditModal";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function Developers() {
+export default function Developers({ role }) {
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
-  let query = { role: "cto", user: "developer" };
+
+  let query = { role, user: "developer" };
   const { data } = useAllUsersQuery({ ...query });
   const developers = data?.data;
 

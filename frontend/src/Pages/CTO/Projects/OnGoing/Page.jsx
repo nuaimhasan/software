@@ -4,9 +4,9 @@ import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectA
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
-export default function OnGoingProjects() {
+export default function OnGoingProjects({ role }) {
   const { data, isLoading } = useAllDeveloperProjectQuery({
-    role: "cto",
+    role,
     status: "ongoing",
   });
   const projects = data?.data;

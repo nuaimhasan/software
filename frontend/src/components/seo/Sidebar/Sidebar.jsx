@@ -4,6 +4,7 @@ import SidebarItems from "./SidebarItems";
 import { Link } from "react-router-dom";
 import { FaMoneyBill, FaUsers } from "react-icons/fa";
 import { IoBusiness } from "react-icons/io5";
+import { GrUserWorker } from "react-icons/gr";
 
 const adminSidebarItems = [
   {
@@ -60,6 +61,33 @@ const adminSidebarItems = [
       {
         title: "All Work",
         path: "/seo/dailywork/all",
+      },
+    ],
+  },
+  {
+    icon: <GrUserWorker />,
+    title: "Employee",
+    subMenu: [
+      {
+        title: "Developer",
+        subSubMenu: [
+          {
+            title: "All Developer",
+            path: "/seo/employee/developer/all",
+          },
+          {
+            title: "Asign Projects",
+            path: "/seo/employee/developer/project/asigns",
+          },
+          {
+            title: "On Going Projects",
+            path: "/seo/employee/developer/project/ongoing",
+          },
+          {
+            title: "Completed Projects",
+            path: "/seo/employee/developer/project/completed",
+          },
+        ],
       },
     ],
   },

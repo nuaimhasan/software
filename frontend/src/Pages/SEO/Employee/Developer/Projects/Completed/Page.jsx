@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import { TbPassword, TbWorldWww } from "react-icons/tb";
 import { FaRegUser } from "react-icons/fa";
 
-export default function CompletedProjects({ role }) {
+export default function CompletedProjects() {
   const { data, isLoading } = useAllDeveloperProjectQuery({
-    role,
+    role: "cto",
     status: "completed",
   });
   const projects = data?.data;

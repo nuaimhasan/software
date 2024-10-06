@@ -8,6 +8,10 @@ import AllServices from "../Pages/SEO/Business/Service/All/Page";
 import DailyWork from "../Pages/SEO/DailyWork/All/Page";
 import AddTodayWork from "../Pages/SEO/DailyWork/Add/Page";
 import AllPayment from "../Pages/SEO/Payment/All/Page";
+import Developers from "../Pages/CTO/Developer/All/Page";
+import AsignsProjects from "../Pages/CTO/Projects/Asigns/Page";
+import OnGoingProjects from "../Pages/CTO/Projects/OnGoing/Page";
+import CompletedProjects from "../Pages/CTO/Projects/Completed/Page";
 
 export const seoRoutes = {
   path: "/seo",
@@ -55,6 +59,24 @@ export const seoRoutes = {
     {
       path: "dailywork/add",
       element: <AddTodayWork />,
+    },
+
+    // ---- employee ----
+    {
+      path: "employee/developer/all",
+      element: <Developers role="seo" />,
+    },
+    {
+      path: "employee/developer/project/asigns",
+      element: <AsignsProjects role="seo" />,
+    },
+    {
+      path: "employee/developer/project/ongoing",
+      element: <OnGoingProjects role="seo" />,
+    },
+    {
+      path: "employee/developer/project/completed",
+      element: <CompletedProjects role="seo" />,
     },
   ],
 };

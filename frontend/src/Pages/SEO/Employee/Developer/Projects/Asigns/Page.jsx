@@ -10,11 +10,11 @@ import {
   useDeleteDeveloperProjectMutation,
 } from "../../../../Redux/develoeprProjectApi";
 
-export default function AsignsProjects({ role }) {
+export default function AsignsProjects() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   const { data, isLoading } = useAllDeveloperProjectQuery({
-    role,
+    role: "cto",
     status: "pending",
   });
   const projects = data?.data;
