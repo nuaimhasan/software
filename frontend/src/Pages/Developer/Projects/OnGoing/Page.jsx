@@ -2,9 +2,13 @@ import moment from "moment";
 import { MdEdit } from "react-icons/md";
 import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectApi";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import EditModal from "./EditModal";
 
 export default function OnGoingProjects() {
   const { loggedUser } = useSelector((state) => state.user);
+  const [selectedProject, setSelectedProject] = useState(null);
+
   const { data, isLoading } = useAllDeveloperProjectQuery({
     role: "developer",
     status: "ongoing",
@@ -45,9 +49,16 @@ export default function OnGoingProjects() {
                 <td>
                   <div className="flex items-center gap-2">
                     <div>
-                      <button>
+                      <button
+                        onClick={() => {
+                          setSelectedProject(project);
+                          document.getElementById("edit_project_modal").show();
+                        }}
+                      >
                         <MdEdit className="text-lg text-blue-500" />
                       </button>
+
+                      <EditModal project={selectedProject} />
                     </div>
                   </div>
                 </td>

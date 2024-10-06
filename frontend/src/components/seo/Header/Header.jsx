@@ -1,12 +1,11 @@
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ToggleTheme from "../../ToggleTheme/ToggleTheme";
 import { useLogoutMutation } from "../../../Redux/user/authApi";
 import { toast } from "react-hot-toast";
 import { IoNotifications } from "react-icons/io5";
 
 export default function Header({ sidebar, setSidebar }) {
-  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const [logout] = useLogoutMutation();
@@ -27,14 +26,14 @@ export default function Header({ sidebar, setSidebar }) {
     <header className="bg-base-100 px-6 py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <p>{pathname}</p>
-
           <button
             onClick={() => setSidebar(!sidebar)}
             className="admin_sidebar_btn lg:hidden"
           >
             <HiOutlineMenuAlt2 className="text-2xl" />
           </button>
+
+          <p>SEO</p>
         </div>
 
         <div>

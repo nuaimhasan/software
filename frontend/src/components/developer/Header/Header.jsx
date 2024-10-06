@@ -29,6 +29,8 @@ export default function Header({ sidebar, setSidebar }) {
           >
             <HiOutlineMenuAlt2 className="text-2xl" />
           </button>
+
+          <p>Developer</p>
         </div>
 
         <div>
