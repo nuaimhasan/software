@@ -130,3 +130,31 @@ exports.destroy = async (req, res) => {
     });
   }
 };
+
+// update project status and add startdate
+exports.updateStatus = async (req, res) => {
+  const { id } = req.params;
+  const data = req.body;
+
+  try {
+    const result = await Model.findByIdAndUpdate(id, data, { new: true });
+
+    if (!result) {
+      return res.json({
+        success: false,
+        message: "project not updated",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "project status update successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

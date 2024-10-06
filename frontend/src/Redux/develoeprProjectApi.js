@@ -44,6 +44,15 @@ export const develoeprProjectApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["developerProject"],
     }),
+
+    updateStatusProject: builder.mutation({
+      query: ({ id, data, role }) => ({
+        url: `/api/project/developer/update/status/${id}?role=${role}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["developerProject"],
+    }),
   }),
 });
 
@@ -53,4 +62,5 @@ export const {
   useSingleDeveloperProjectQuery,
   useDeleteDeveloperProjectMutation,
   useUpdateDeveloperProjectMutation,
+  useUpdateStatusProjectMutation,
 } = develoeprProjectApi;

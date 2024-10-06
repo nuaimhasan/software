@@ -1,16 +1,18 @@
-import { FaEye } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import moment from "moment";
 import { useState } from "react";
 import EditModal from "./EditModal";
 import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectApi";
+import { useSelector } from "react-redux";
 
 export default function AsignsProjects() {
+  const { loggedUser } = useSelector((state) => state.user);
   const [selectedProject, setSelectedProject] = useState(null);
 
   const { data, isLoading } = useAllDeveloperProjectQuery({
-    role: "cto",
+    role: "developer",
     status: "pending",
+    user: loggedUser?.data?._id,
   });
   const projects = data?.data;
 
@@ -55,12 +57,6 @@ export default function AsignsProjects() {
                       </button>
 
                       <EditModal project={selectedProject} />
-                    </div>
-
-                    <div>
-                      <button>
-                        <FaEye className="text-lg text-red-500" />
-                      </button>
                     </div>
                   </div>
                 </td>

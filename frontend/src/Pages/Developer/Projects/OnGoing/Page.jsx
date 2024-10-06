@@ -1,12 +1,14 @@
 import moment from "moment";
-import { FaEye } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectApi";
+import { useSelector } from "react-redux";
 
 export default function OnGoingProjects() {
+  const { loggedUser } = useSelector((state) => state.user);
   const { data, isLoading } = useAllDeveloperProjectQuery({
-    role: "cto",
+    role: "developer",
     status: "ongoing",
+    user: loggedUser?.data?._id,
   });
   const projects = data?.data;
 
@@ -45,12 +47,6 @@ export default function OnGoingProjects() {
                     <div>
                       <button>
                         <MdEdit className="text-lg text-blue-500" />
-                      </button>
-                    </div>
-
-                    <div>
-                      <button>
-                        <FaEye className="text-lg text-red-500" />
                       </button>
                     </div>
                   </div>

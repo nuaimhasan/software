@@ -2,6 +2,7 @@ import moment from "moment";
 
 import { useAllDeveloperProjectQuery } from "../../../../Redux/develoeprProjectApi";
 import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
 export default function OnGoingProjects() {
   const { data, isLoading } = useAllDeveloperProjectQuery({
@@ -43,7 +44,7 @@ export default function OnGoingProjects() {
                 <td>
                   <div className="flex items-center gap-2">
                     <Link to={`/cto/projects/completed/${project?._id}`}>
-                      View
+                      <FaEye />
                     </Link>
                   </div>
                 </td>

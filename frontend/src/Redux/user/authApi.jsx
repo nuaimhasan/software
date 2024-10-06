@@ -10,6 +10,8 @@ export const authApi = apiSlice.injectEndpoints({
         body: data,
         params: { role },
       }),
+
+      invalidatesTags: ["users"],
     }),
 
     login: builder.mutation({

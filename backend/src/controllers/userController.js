@@ -171,3 +171,81 @@ exports.allUsers = async (req, res) => {
     });
   }
 };
+
+exports.updateUser = async (req, res) => {
+  const { id } = req?.params;
+  let data = req?.body;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "user not found",
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(data?.password, salt);
+
+    // password optional
+    if (data?.password) {
+      data.password = hashedPassword;
+    }
+
+    const result = await User.findByIdAndUpdate(id, data, { new: true });
+
+    if (!result) {
+      return res.json({
+        success: false,
+        message: "user not updated",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "user updated successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  const { id } = req?.params;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.json({
+        success: false,
+        message: "user not found",
+      });
+    }
+
+    const result = await User.findByIdAndDelete(id);
+
+    if (!result) {
+      return res.json({
+        success: false,
+        message: "user not deleted",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "user deleted successfully",
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

@@ -10,20 +10,21 @@ export const userApi = apiSlice.injectEndpoints({
       providesTags: ["users"],
     }),
 
-    editUserInfo: builder.mutation({
-      query: ({ id, userInfo }) => ({
-        url: `/user/update/info/${id}`,
+    updateUser: builder.mutation({
+      query: ({ id, data, role }) => ({
+        url: `/api/user/update/${id}`,
         method: "PUT",
-        body: userInfo,
+        body: data,
+        params: { role },
       }),
       invalidatesTags: ["users"],
     }),
 
-    editUserImage: builder.mutation({
-      query: ({ id, formData }) => ({
-        url: `/user/updateImage/${id}`,
-        method: "PUT",
-        body: formData,
+    deleteUser: builder.mutation({
+      query: ({ id, role }) => ({
+        url: `/api/user/delete/${id}`,
+        method: "DELETE",
+        params: { role },
       }),
       invalidatesTags: ["users"],
     }),
@@ -32,6 +33,6 @@ export const userApi = apiSlice.injectEndpoints({
 
 export const {
   useAllUsersQuery,
-  useEditUserInfoMutation,
-  useEditUserImageMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
 } = userApi;

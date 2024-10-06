@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    updateBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
