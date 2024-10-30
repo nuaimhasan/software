@@ -8,14 +8,14 @@ const cookieParser = require("cookie-parser");
 const apiRoutes = require("./src/routes/index");
 
 require("dotenv").config();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3051;
 
 const app = express();
 
 // middlewares
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["https://www.software.emanagerit.com"],
     credentials: true,
   })
 );
