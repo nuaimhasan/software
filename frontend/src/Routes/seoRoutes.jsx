@@ -1,5 +1,5 @@
 import SEOLayout from "../Layout/SEOLayout";
-import Dashboard from "../pages/SEO/Dashboard/Dashboard";
+import Dashboard from "../Pages/SEO/Dashboard/Dashboard";
 import AddClient from "../Pages/SEO/Client/Add/Page";
 import AllClients from "../Pages/SEO/Client/All/Page";
 import ClientDetails from "../Pages/SEO/Client/Details/Page";
