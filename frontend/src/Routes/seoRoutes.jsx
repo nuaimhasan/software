@@ -1,4 +1,4 @@
-import SEOLayout from "../layout/SEOLayout";
+import SEOLayout from "../Layout/SEOLayout";
 import Dashboard from "../pages/SEO/Dashboard/Dashboard";
 import AddClient from "../Pages/SEO/Client/Add/Page";
 import AllClients from "../Pages/SEO/Client/All/Page";

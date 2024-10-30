@@ -1,4 +1,4 @@
-import CTOLayout from "../layout/CTOLayout";
+import CTOLayout from "../Layout/CTOLayout";
 import Dashboard from "../Pages/CTO/Dashboard/Dashboard";
 import Developers from "../Pages/CTO/Developer/All/Page";
 import AsignsProjects from "../Pages/CTO/Projects/Asigns/Page";

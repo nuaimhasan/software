@@ -1,4 +1,4 @@
-import DeveloperLayout from "../layout/DeveloperLayout";
+import DeveloperLayout from "../Layout/DeveloperLayout";
 import Dashboard from "../pages/Developer/Dashboard/Dashboard";
 import AsignsProjects from "../Pages/Developer/Projects/Asigns/Page";
 import CompletedProjects from "../Pages/Developer/Projects/Completed/Page";
