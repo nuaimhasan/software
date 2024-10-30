@@ -18,6 +18,7 @@ app.use(
     origin: [
       "https://software.emanagerit.com",
       "https://www.software.emanagerit.com",
+      "http://localhost:3050",
     ],
     credentials: true,
   })
