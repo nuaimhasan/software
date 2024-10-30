@@ -31,7 +31,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 // Web cache validation and conditional requests in Http
-app.set("etag", true);
+// app.set("etag", true);
 
 // Serve static assets for React front end
 app.use(express.static("uploads"));
