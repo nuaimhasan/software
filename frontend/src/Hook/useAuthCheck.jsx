@@ -2,9 +2,10 @@ import { useSelector } from "react-redux";
 import { useLoggedUserQuery } from "../Redux/user/authApi";
 
 export function useAuthCheck(role) {
-  const { data, isLoading: userQueryLoading } = useLoggedUserQuery({
+  const { isLoading: userQueryLoading } = useLoggedUserQuery({
     role,
   });
+
   const { loggedUser, userLoading } = useSelector((state) => state.user);
 
   const isLoading = userQueryLoading || userLoading;

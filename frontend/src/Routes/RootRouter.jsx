@@ -17,7 +17,7 @@ const router = createBrowserRouter([
 ]);
 
 const RootRouter = () => {
-  const { data } = useLoggedUserQuery();
+  useLoggedUserQuery();
 
   return (
     <>

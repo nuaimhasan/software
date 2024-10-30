@@ -12,10 +12,13 @@ const port = process.env.PORT || 3051;
 
 const app = express();
 
-// middlewares
+// middlewares "https://www.software.emanagerit.com",
 app.use(
   cors({
-    origin: ["https://www.software.emanagerit.com"],
+    origin: [
+      "https://software.emanagerit.com",
+      "https://www.software.emanagerit.com",
+    ],
     credentials: true,
   })
 );
